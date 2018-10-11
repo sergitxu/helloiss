@@ -2,12 +2,45 @@
 <html>
 <head>
 <title>Hello ISS</title>
+
 </head>
 
 <body>
-Hello ISS!
+<h1>Hello ISS!</h1>
+
+<article>
+  <title>ISS Crew</title>
+  <img src="" alt="ISS Crew" id="crewImg" />
+  <ul id="crew"></body>
+
+</article>
+
+<script>
+
+  document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/iss056e032438.jpg';
 
 
+  var crew = [{
+    name: 'Serena Au&ntilde;&oacute;n-Chancellor',
+    url: 'https://www.nasa.gov/astronauts/biographies/serena-m-aunon-chancellor'
+    },
+    {
+    name: 'Commander Alexander Gerst',
+    url: 'http://www.esa.int/Our_Activities/Human_Spaceflight/Astronauts/Alexander_Gerst'
+    },
+    {
+    name: 'Sergey Prokopyev',
+    url: 'http://www.gctc.ru/main.php?id=201'
+    }]
+  
+    for(i=0; i<crew.length; i++) {
+      document.getElementById('crew').innerHTML+=`<li>${crew[i].name}</li>`;
+    };
+
+
+  
+  
+</script>
 <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
 <script>
   // Initialize Firebase
