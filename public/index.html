@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hello ISS</title>
-
+  <title>Hello ISS</title>
+  <link rel="stylesheet" type="text/css" href="css/helloiss.css">
+  <script>
+    // TODO get image from NASA that changes it periodically
+    // source I: https://www.nasa.gov/multimedia/imagegallery/iotd.html
+    // source II: Image of the Earth from ISS
+    document.body.style.backgroundImage = '';
+  </script>
 </head>
 
 <body>
@@ -12,35 +18,74 @@
   <title>ISS Crew</title>
   <img src="" alt="ISS Crew" id="crewImg" />
   <ul id="crew"></body>
-
+  <!-- TODO: Add current mission name and logo -->
 </article>
 
-<script>
+<article>
+  <title>ISS current position</title>
+  <!-- 
+    TODO get current position lat long
+    Calculate country, ws openmaps
+    get language
+    create a dictionary with greetings morning, evening, night
+    get time in that position
+    calculate if it is morning, evening or night
+    show greeting in the proper language
 
-  document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/iss056e032438.jpg';
+    MUSIC:
+    get the most heared song on this country and play with last fm
+  -->
+</article>
 
+<article>
+  <title>Kilometres made today (GMT)</title>
+  <!-- TODO Get info from external source -->
+</article>
 
-  var crew = [{
-    name: 'Serena Au&ntilde;&oacute;n-Chancellor',
-    url: 'https://www.nasa.gov/astronauts/biographies/serena-m-aunon-chancellor'
-    },
-    {
-    name: 'Commander Alexander Gerst',
-    url: 'http://www.esa.int/Our_Activities/Human_Spaceflight/Astronauts/Alexander_Gerst'
-    },
-    {
-    name: 'Sergey Prokopyev',
-    url: 'http://www.gctc.ru/main.php?id=201'
-    }]
-  
-    for(i=0; i<crew.length; i++) {
-      document.getElementById('crew').innerHTML+=`<li>${crew[i].name}</li>`;
-    };
+<article>
+  <title>Total time in orbit</title>
+  <!-- Get the release date and create a counter -->
+</article>
 
+<article>
+  <title>Videos</title>
+  <!-- TODO Add ISS Youtube real time video or:
+  http://www.estacionespacial.com/videos.php -->
+</article>
 
-  
-  
-</script>
+<article>
+  <title>ISS from ground</title>
+  <!-- 
+    TODO 
+    get a source of photos
+    create a carousel showing photos from Earth
+    add credits to each photo
+  -->
+</article>
+
+<article>
+  <title>Tweets from ISS</title>
+  <!-- TODO
+    Option 1: Official account: https://twitter.com/Space_Station
+    Option 2: Get relevant tweets on the topic
+    -->
+</article>
+
+<article>
+  <title>Next time ISS will pass close to you</title>
+  <!-- TODO get user position and calculate next time that will be close to user.
+  Get it from navigator
+  Calculate cities close to user's position
+  Claculate when the ISS will pass over user
+  -->
+</article>
+
+<article>
+    <title>Notifications possible Earth destructor</title>
+    <!-- TODO Get info from NASA api donkiWSA -->
+ </article>
+
+  <script src="js/helloiss.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
 <script>
   // Initialize Firebase
