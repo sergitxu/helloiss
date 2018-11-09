@@ -11,6 +11,8 @@
   // TODO Actually take from their site: https://www.nasa.gov/mission_pages/station/expeditions/index.html
   document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/iss056e032438.jpg';
   
+// TODO create service to getAPIs
+
   // Get crew info from NASA
   let getCrew = url => {
     var xmlHttp = new XMLHttpRequest();
@@ -83,7 +85,7 @@ let locateISS = url => {
           // TODO show real map? Cuidado si cobran
           // Mostrar recorrido
           // Colocar mapa en la página
-          const googleMapsKey = "AIzaSyApZj382B_afAx4ecNtytJFhvWhTf9WvWw";
+          const googleMapsKey = "XXX";
           const img_url = `http://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=14&size=400x300&sensor=false&key=${googleMapsKey}`;
           //document.body.innerHTML = `<img src='${img_url}'>`;
 
