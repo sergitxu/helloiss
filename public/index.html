@@ -3,53 +3,43 @@
 <head>
   <title>Hello ISS</title>
   <link rel="stylesheet" type="text/css" href="css/helloiss.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <!-- // TODO add favicon -->
 </head>
 
 <body>
 <h1>Hello ISS!</h1>
 
-<article>
-  <title>ISS Crew</title>
+<article class="card">
+  <title class="card__title">ISS Crew</title>
   <img src="" alt="ISS Crew" id="crewImg" />
   <ul id="crew"></body>
   <!-- TODO: Add current mission name and logo -->
 </article>
 
-<article>
-  <title>ISS current position</title>
-  <!-- 
-    TODO get current position lat long
-    Calculate country, ws openmaps
-    get language
-    create a dictionary with greetings morning, evening, night
-    get time in that position
-    calculate if it is morning, evening or night
-    show greeting in the proper language
-
-    MUSIC:
-    get the most heared song on this country and play with last fm
-  -->
+<article class="card">
+  <title class="card__title">ISS current position</title>
+  <img src="" id="positionMap"></div>
 </article>
 
-<article>
-  <title>Kilometres made today (GMT)</title>
+<article class="card">
+  <title class="card__title">Kilometres made today (GMT)</title>
   <!-- TODO Get info from external source -->
 </article>
 
-<article>
-  <title>Total time in orbit</title>
+<article class="card">
+  <title class="card__title">Total time in orbit</title>
   <!-- Get the release date and create a counter -->
 </article>
 
-<article>
-  <title>Videos</title>
+<article class="card">
+  <title class="card__title">Videos</title>
   <!-- TODO Add ISS Youtube real time video or:
   http://www.estacionespacial.com/videos.php -->
 </article>
 
-<article>
-  <title>ISS from ground</title>
+<article class="card">
+  <title class="card__title">ISS from ground</title>
   <!-- 
     TODO 
     get a source of photos
@@ -58,16 +48,16 @@
   -->
 </article>
 
-<article>
-  <title>Tweets from ISS</title>
+<article class="card">
+  <title class="card__title">Tweets from ISS</title>
   <!-- TODO
     Option 1: Official account: https://twitter.com/Space_Station
     Option 2: Get relevant tweets on the topic
     -->
 </article>
 
-<article>
-  <title>Next time ISS will pass close to you</title>
+<article class="card">
+  <title class="card__title">Next time ISS will pass close to you</title>
   <!-- TODO get user position and calculate next time that will be close to user.
   Get it from navigator
   Calculate cities close to user's position
@@ -75,8 +65,8 @@
   -->
 </article>
 
-<article>
-    <title>Notifications possible Earth destructor</title>
+<article class="card">
+    <title class="card__title">Notifications possible Earth destructor</title>
     <!-- TODO Get info from NASA api donkiWSA -->
  </article>
 

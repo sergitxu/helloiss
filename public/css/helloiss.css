@@ -2,6 +2,14 @@ body {
     background-image: url('');
 }
 
-article {
+h1{
+    font-family: 'Press Start 2P', cursive;
+}
+
+.card {
     border: 1px solid #333;
+}
+
+.card__title {
+    display: block;
 }

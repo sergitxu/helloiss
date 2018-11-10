@@ -84,10 +84,9 @@ let locateISS = url => {
 
           // TODO show real map? Cuidado si cobran
           // Mostrar recorrido
-          // Colocar mapa en la página
           const googleMapsKey = "XXX";
           const img_url = `http://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=14&size=400x300&sensor=false&key=${googleMapsKey}`;
-          //document.body.innerHTML = `<img src='${img_url}'>`;
+          document.getElementById('positionMap').src = `${img_url}`;
 
           getCountryCode(countryCodeUrl);
 
