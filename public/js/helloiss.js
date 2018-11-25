@@ -7,7 +7,7 @@
   // source II: Image of the Earth from ISS
   document.body.style.backgroundImage = '';
 
-  // Get crow image from NASA
+  // Get crew image from NASA
   // TODO Actually take from their site: https://www.nasa.gov/mission_pages/station/expeditions/index.html
   document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/iss056e032438.jpg';
   
@@ -16,7 +16,7 @@
   // Get crew info from NASA
   let getCrew = url => {
     var xmlHttp = new XMLHttpRequest();
-    
+
     xmlHttp.onreadystatechange = function() {
 
         if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
@@ -84,10 +84,18 @@ let locateISS = url => {
 
           // TODO show real map? Cuidado si cobran
           // Mostrar recorrido
-          const googleMapsKey = "XXX";
-          const img_url = `http://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=14&size=400x300&sensor=false&key=${googleMapsKey}`;
-          document.getElementById('positionMap').src = `${img_url}`;
+          const googleMapsKey = "AIzaSyApZj382B_afAx4ecNtytJFhvWhTf9WvWw";
+          // const img_url = `http://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=14&size=400x300&sensor=false&key=${googleMapsKey}`;
+          // document.getElementById('positionMap').src = `${img_url}`;
 
+
+        
+            // You can set control options to change the default position or style of many
+            // of the map controls.
+
+            
+        
+        
           getCountryCode(countryCodeUrl);
 
         }

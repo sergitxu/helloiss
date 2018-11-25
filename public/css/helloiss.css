@@ -1,9 +1,11 @@
 body {
-    background-image: url('');
+    background-image: url('../img/stars.jpg');
+    margin: 0;
 }
 
 h1{
     font-family: 'Press Start 2P', cursive;
+    color: #fff;
 }
 
 .card {
@@ -13,3 +15,14 @@ h1{
 .card__title {
     display: block;
 }
+
+#map {
+    height: 100%;
+  }
+
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
