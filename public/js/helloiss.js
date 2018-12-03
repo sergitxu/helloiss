@@ -9,7 +9,7 @@
 
   // Get crew image from NASA
   // TODO Actually take from their site: https://www.nasa.gov/mission_pages/station/expeditions/index.html
-  document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/iss056e032438.jpg';
+  document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/exp57_crew_greeting2.jpg';
   
 // TODO create service to getAPIs
 
