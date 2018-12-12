@@ -37,7 +37,7 @@
     xmlHttp.send();
 }
 
-getCrew("http://api.open-notify.org/astros.json");
+
 
 //Get Country Code for ISS location
 
@@ -51,8 +51,8 @@ let getCountryCode = url => {
         
         if (ISSCountryLocation.geonames[0]) {
           let ISScountryCode = ISSCountryLocation.geonames[0].countryCode;
-
-        console.log(ISScountryCode);
+          let ISScountryName = ISSCountryLocation.geonames[0].countryName;
+          document.getElementById('countryCode').innerText = `${ISScountryName}: ${ISScountryCode}`;
         }
         
 
@@ -78,24 +78,18 @@ let locateISS = url => {
           let ISSlatitude = ISSlocation.iss_position.latitude;
           let ISSlongitude = ISSlocation.iss_position.longitude;
 
-          let countryCodeUrl = `http://api.geonames.org/findNearbyJSON?username=${USERNAME}&lat=${ISSlatitude}&lng=${ISSlongitude}`;
+          let countryCodeUrl = `https://api.geonames.org/findNearbyJSON?username=${USERNAME}&lat=${ISSlatitude}&lng=${ISSlongitude}`;
 
           const latlon = `${ISSlatitude},${ISSlongitude}`;
+
 
           // TODO show real map? Cuidado si cobran
           // Mostrar recorrido
           const googleMapsKey = "AIzaSyApZj382B_afAx4ecNtytJFhvWhTf9WvWw";
-          // const img_url = `http://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=14&size=400x300&sensor=false&key=${googleMapsKey}`;
-          // document.getElementById('positionMap').src = `${img_url}`;
+          const img_url = `https://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=5&size=400x300&sensor=false&key=${googleMapsKey}`;
+          document.getElementById('positionMap').src = `${img_url}`;
 
-
-        
-            // You can set control options to change the default position or style of many
-            // of the map controls.
-
-            
-        
-        
+          console.log(countryCodeUrl);
           getCountryCode(countryCodeUrl);
 
         }
@@ -110,8 +104,13 @@ let locateISS = url => {
   xmlHttp.send();
 }
 
-locateISS("http://api.open-notify.org/iss-now.json")
+function init() {
+  getCrew("https://api.open-notify.org/astros.json");
 
+  locateISS("https://api.open-notify.org/iss-now.json")
+  
+}
 
+init();
 
 })();
