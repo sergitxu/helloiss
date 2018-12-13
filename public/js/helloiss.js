@@ -123,11 +123,18 @@ setInterval(
     var totalSecs = parseInt(timeInOrbit / 1000);
     let totalMins = parseInt(totalSecs / 60);
     let totalHours = parseInt(totalMins / 60);
-    let days = parseInt(totalHours / 24);
-    let hours = parseInt(totalHours - (days * 24) - 1);
+    let totalDays = parseInt(totalHours / 24);
+    // let totalMonths = parseInt(totalDays / 30);
+
+    let years = parseInt(totalDays / 365);
+    // let months = parseInt(totalMonths - (years * 12));
+    let days = parseInt(totalDays - (years * 365));
+    let hours = parseInt(totalHours - (totalDays * 24));
     let mins = parseInt(totalMins - (totalHours * 60));
     let secs = parseInt(totalSecs - (totalMins * 60));
 
+    years = addZero(years);
+    // months = addZero(months);
     days = addZero(days);
     hours = addZero(hours);
     mins = addZero(mins);
@@ -135,7 +142,7 @@ setInterval(
 
 
     document.getElementById('timeInOrbit').innerText = `
-    ${days} days, ${hours} hours, ${mins} minutes and ${secs} seconds.
+    ${years} years, ${days} days, ${hours} hours, ${mins} min. and ${secs} sec.
     `;
   
   }, 1000);
