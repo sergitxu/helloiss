@@ -10,6 +10,8 @@
   // Get crew image from NASA
   // TODO Actually take from their site: https://www.nasa.gov/mission_pages/station/expeditions/index.html
   document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/exp57_crew_greeting2.jpg';
+
+ 
   
 // TODO create service to getAPIs
 
@@ -104,13 +106,48 @@ let locateISS = url => {
   xmlHttp.send();
 }
 
+function addZero(number){
+  if (number < 10) {
+    number = "0" + number;
+  };
+  return number;
+}
+
+// Get ISS orbiting time
+setInterval(
+  function timeInOrbit(since) {
+    since = new Date("November 20 1998 00:00").getTime();
+    let today = new Date().getTime();
+
+    var timeInOrbit = today - since;
+    var totalSecs = parseInt(timeInOrbit / 1000);
+    let totalMins = parseInt(totalSecs / 60);
+    let totalHours = parseInt(totalMins / 60);
+    let days = parseInt(totalHours / 24);
+    let hours = parseInt(totalHours - (days * 24) - 1);
+    let mins = parseInt(totalMins - (totalHours * 60));
+    let secs = parseInt(totalSecs - (totalMins * 60));
+
+    days = addZero(days);
+    hours = addZero(hours);
+    mins = addZero(mins);
+    secs = addZero(secs);
+
+
+    document.getElementById('timeInOrbit').innerText = `
+    ${days} days, ${hours} hours, ${mins} minutes and ${secs} seconds.
+    `;
+  
+  }, 1000);
+  
+
 function init() {
   getCrew("https://api.open-notify.org/astros.json");
+  locateISS("https://api.open-notify.org/iss-now.json"); 
 
-  locateISS("https://api.open-notify.org/iss-now.json")
-  
 }
 
 init();
+
 
 })();
