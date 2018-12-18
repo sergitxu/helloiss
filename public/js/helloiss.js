@@ -39,8 +39,6 @@
     xmlHttp.send();
 }
 
-
-
 //Get Country Code for ISS location
 
 let getCountryCode = url => {
@@ -147,11 +145,59 @@ setInterval(
   
   }, 1000);
   
+  // Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+// Helper method to parse the title tag from the response.
+function getTitle(text) {
+  return text.match('<title>(.*)?</title>')[1];
+}
+
+
+//Get ISS news
+
+let getISSNews = url => {
+  var xmlHttp = new XMLHttpRequest();
+  
+  xmlHttp.onreadystatechange = function() {
+
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        let getNews = JSON.parse(xmlHttp.responseText);
+        
+        // if (getNews.geonames[0]) {
+        //   let ISScountryCode = getNews.geonames[0].countryCode;
+        //   let ISScountryName = getNews.geonames[0].countryName;
+        //   document.getElementById('countryCode').innerText = `${ISScountryName}: ${ISScountryCode}`;
+        // }
+        
+
+      } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+          console.error("ERROR! 404");
+          console.info(JSON.parse(xmlHttp.responseText));
+      }
+  };
+  xmlHttp.open("GET", url, true);
+  xmlHttp.send();
+}
 
 function init() {
   getCrew("https://api.open-notify.org/astros.json");
-  locateISS("https://api.open-notify.org/iss-now.json"); 
-
+  locateISS("https://api.open-notify.org/iss-now.json");
+  getISSNews("https://blogs.nasa.gov/spacestation/feed/"); 
 }
 
 init();
