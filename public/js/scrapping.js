@@ -1,14 +1,28 @@
 const cheerio = require ('cheerio');
 const axios = require('axios');
 
-var url = "http://www.ariss.org/current-iss-crew.html";
+<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAuCyluUBYF9-kXVR8dn1PN92a-xTSY0cI",
+    authDomain: "hello-iss.firebaseapp.com",
+    databaseURL: "https://hello-iss.firebaseio.com",
+    projectId: "hello-iss",
+    storageBucket: "hello-iss.appspot.com",
+    messagingSenderId: "XXX"
+  };
+  firebase.initializeApp(config);
+
+ let database = firebase.database();
 
 axios.get(url)
 .then(response => {
     const $ = cheerio.load(response.data);
     const issCrewImg = 'http://www.ariss.org' + $('.galleryImageBorder').attr('src');
 
-    console.log(issCrewImg);
+    firebase.database().ref('ISSCrewImage/').set({
+        url: issCrewImg
+    });
 })
 .catch(error => {
     console.log('error', error);

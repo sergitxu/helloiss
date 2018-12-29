@@ -1,15 +1,23 @@
 (function(){
 
-
-
   // TODO get image from NASA that changes it periodically
   // source I: https://www.nasa.gov/multimedia/imagegallery/iotd.html
   // source II: Image of the Earth from ISS
   document.body.style.backgroundImage = '';
 
   // Get crew image from NASA
-  // TODO Actually take from their site: https://www.nasa.gov/mission_pages/station/expeditions/index.html
-  document.getElementById('crewImg').src = 'https://nasa.gov' + '/sites/default/files/styles/2x1_cardfeed/public/thumbnails/image/exp57_crew_greeting2.jpg';
+  // TODO GET ISSCrewImage url from firebase database
+
+  // var database = firebase.database();
+  // function writeCrewImg(imageURL) {
+  //   firebase.database().ref('ISSCrewImage/').get({
+  //     url: imageURL
+  //   });
+  // }
+
+  // writeCrewImg(imageURL);
+
+ 
 
  
   
@@ -195,7 +203,8 @@ let getISSNews = url => {
 }
 
 function init() {
-  getCrew("https://api.open-notify.org/astros.json");
+  
+  getCrew("http://api.open-notify.org/astros.json");
   locateISS("https://api.open-notify.org/iss-now.json");
   getISSNews("https://blogs.nasa.gov/spacestation/feed/"); 
 }
