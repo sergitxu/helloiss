@@ -6,21 +6,12 @@
   document.body.style.backgroundImage = '';
 
   // Get crew image from NASA
-  // TODO GET ISSCrewImage url from firebase database
-
-  // var database = firebase.database();
-  // function writeCrewImg(imageURL) {
-  //   firebase.database().ref('ISSCrewImage/').get({
-  //     url: imageURL
-  //   });
-  // }
-
-  // writeCrewImg(imageURL);
-
+  var ISSCrewImage = firebase.database().ref('ISSCrewImage/');
+  ISSCrewImage.on('value', function(snapshot) {
+  document.getElementById('crewImg').src = snapshot.val().url;
+});
  
-
- 
-  
+     
 // TODO create service to getAPIs
 
   // Get crew info from NASA
@@ -86,7 +77,7 @@ let locateISS = url => {
           let ISSlatitude = ISSlocation.iss_position.latitude;
           let ISSlongitude = ISSlocation.iss_position.longitude;
 
-          let countryCodeUrl = `https://api.geonames.org/findNearbyJSON?username=${USERNAME}&lat=${ISSlatitude}&lng=${ISSlongitude}`;
+          let countryCodeUrl = `http://api.geonames.org/findNearbyJSON?username=${USERNAME}&lat=${ISSlatitude}&lng=${ISSlongitude}`;
 
           const latlon = `${ISSlatitude},${ISSlongitude}`;
 

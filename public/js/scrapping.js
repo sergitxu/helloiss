@@ -1,17 +1,6 @@
 const cheerio = require ('cheerio');
 const axios = require('axios');
 
-<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAuCyluUBYF9-kXVR8dn1PN92a-xTSY0cI",
-    authDomain: "hello-iss.firebaseapp.com",
-    databaseURL: "https://hello-iss.firebaseio.com",
-    projectId: "hello-iss",
-    storageBucket: "hello-iss.appspot.com",
-    messagingSenderId: "XXX"
-  };
-  firebase.initializeApp(config);
 
  let database = firebase.database();
 
