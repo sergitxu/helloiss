@@ -5,11 +5,17 @@
   // source II: Image of the Earth from ISS
   document.body.style.backgroundImage = '';
 
-  // Get crew image from NASA
+  // Add crew image from NASA
   var ISSCrewImage = firebase.database().ref('ISSCrewImage/');
   ISSCrewImage.on('value', function(snapshot) {
-  document.getElementById('crewImg').src = snapshot.val().url;
-});
+    document.getElementById('crewImg').src = snapshot.val().url;
+  });
+
+  // Add ISS position
+  let imgMap = firebase.database().ref('currentPosition/');
+  imgMap.on('value', function(snapshot) {
+    document.getElementById('positionMap').src = snapshot.val().urlMap;
+  });
  
      
 // TODO create service to getAPIs
@@ -36,71 +42,6 @@
     };
     xmlHttp.open("GET", url, true);
     xmlHttp.send();
-}
-
-//Get Country Code for ISS location
-
-let getCountryCode = url => {
-  var xmlHttp = new XMLHttpRequest();
-  
-  xmlHttp.onreadystatechange = function() {
-
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        let ISSCountryLocation = JSON.parse(xmlHttp.responseText);
-        
-        if (ISSCountryLocation.geonames[0]) {
-          let ISScountryCode = ISSCountryLocation.geonames[0].countryCode;
-          let ISScountryName = ISSCountryLocation.geonames[0].countryName;
-          document.getElementById('countryCode').innerText = `${ISScountryName}: ${ISScountryCode}`;
-        }
-        
-
-      } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
-          console.error("ERROR! 404");
-          console.info(JSON.parse(xmlHttp.responseText));
-      }
-  };
-  xmlHttp.open("GET", url, true);
-  xmlHttp.send();
-}
-
-// Get ISS current location
-let locateISS = url => {
-  var xmlHttp = new XMLHttpRequest();
-  
-  xmlHttp.onreadystatechange = function() {
-
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        let ISSlocation = JSON.parse(xmlHttp.responseText);
-        if(ISSlocation.message === 'success'){
-          const USERNAME = 'sergitxu';
-          let ISSlatitude = ISSlocation.iss_position.latitude;
-          let ISSlongitude = ISSlocation.iss_position.longitude;
-
-          let countryCodeUrl = `http://api.geonames.org/findNearbyJSON?username=${USERNAME}&lat=${ISSlatitude}&lng=${ISSlongitude}`;
-
-          const latlon = `${ISSlatitude},${ISSlongitude}`;
-
-
-          // TODO show real map? Cuidado si cobran
-          // Mostrar recorrido
-          const googleMapsKey = "AIzaSyApZj382B_afAx4ecNtytJFhvWhTf9WvWw";
-          const img_url = `https://maps.googleapis.com/maps/api/staticmap?center=${latlon}&zoom=5&size=400x300&sensor=false&key=${googleMapsKey}`;
-          document.getElementById('positionMap').src = `${img_url}`;
-
-          console.log(countryCodeUrl);
-          getCountryCode(countryCodeUrl);
-
-        }
-        
-
-      } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
-          console.error("ERROR! 404");
-          console.info(JSON.parse(xmlHttp.responseText));
-      }
-  };
-  xmlHttp.open("GET", url, true);
-  xmlHttp.send();
 }
 
 function addZero(number){
@@ -144,28 +85,6 @@ setInterval(
   
   }, 1000);
   
-  // Create the XHR object.
-function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  if ("withCredentials" in xhr) {
-    // XHR for Chrome/Firefox/Opera/Safari.
-    xhr.open(method, url, true);
-  } else if (typeof XDomainRequest != "undefined") {
-    // XDomainRequest for IE.
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-  } else {
-    // CORS not supported.
-    xhr = null;
-  }
-  return xhr;
-}
-
-// Helper method to parse the title tag from the response.
-function getTitle(text) {
-  return text.match('<title>(.*)?</title>')[1];
-}
-
 
 //Get ISS news
 
@@ -176,6 +95,8 @@ let getISSNews = url => {
 
       if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         let getNews = JSON.parse(xmlHttp.responseText);
+
+        console.log(getNews);
         
         // if (getNews.geonames[0]) {
         //   let ISScountryCode = getNews.geonames[0].countryCode;
@@ -192,11 +113,54 @@ let getISSNews = url => {
   xmlHttp.open("GET", url, true);
   xmlHttp.send();
 }
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+// Helper method to parse the title tag from the response.
+function getTitle(text) {
+  return text.match('<title>(.*)?</title>')[1];
+}
+// Make the actual CORS request.
+function makeCorsRequest() {
+  // This is a sample server that supports CORS.
+  var url = 'http://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
+
+  var xhr = createCORSRequest('GET', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  // Response handlers.
+  xhr.onload = function() {
+    var text = xhr.responseText;
+    var title = getTitle(text);
+    alert('Response from CORS request to ' + url + ': ' + title);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send();
+}
 
 function init() {
   
   getCrew("http://api.open-notify.org/astros.json");
-  locateISS("https://api.open-notify.org/iss-now.json");
   getISSNews("https://blogs.nasa.gov/spacestation/feed/"); 
 }
 
