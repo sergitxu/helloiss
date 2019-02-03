@@ -5,40 +5,51 @@
   // source II: Image of the Earth from ISS
   document.body.style.backgroundImage = '';
 
-  // Add crew image from NASA
-  var ISSCrewImage = firebase.database().ref('ISSCrewImage/');
+  // ADD INFO from Firebase database to HTML
+
+  // Add crew info
+  let ISSCrewImage = firebase.database().ref('ISSCrewImage/');
   ISSCrewImage.on('value', function(snapshot) {
     document.getElementById('crewImg').src = snapshot.val().url;
   });
 
-  // Add ISS position
+  // Add ISS position info
   let imgMap = firebase.database().ref('currentPosition/');
   imgMap.on('value', function(snapshot) {
     document.getElementById('positionMap').src = snapshot.val().urlMap;
   });
- 
-     
-// TODO create service to getAPIs
 
+  // Add song info
+  let song = firebase.database().ref('song/');
+  song.on('value', function(snapshot) {
+    document.getElementById('songName').innerText = snapshot.val().name;
+    document.getElementById('songArtist').innerText = snapshot.val().artist;
+    document.getElementById('songImage').src = snapshot.val().image;
+    document.getElementById('songUrl').href = snapshot.val().url;
+  });
+
+  // Add country info
+  let countryName = firebase.database().ref('currentCountry/');
+  countryName.on('value', function(snapshot) {
+    document.getElementById('countryName').innerText = snapshot.val().name;
+  });
+ 
   // Get crew info from NASA
   let getCrew = url => {
     var xmlHttp = new XMLHttpRequest();
-
     xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        let crew = JSON.parse(xmlHttp.responseText).people;
 
-        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-          let crew = JSON.parse(xmlHttp.responseText).people;
-
-          crew.forEach(function(astronaut) {
-            if (astronaut.craft === 'ISS') {
-              document.getElementById('crew').innerHTML+=`<li>${astronaut.name}</li>`;
-            };
-          });
-
-        } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
-            console.error("ERROR! 404");
-            console.info(JSON.parse(xmlHttp.responseText));
-        }
+        crew.forEach(function(astronaut) {
+          if (astronaut.craft === 'ISS') {
+            document.getElementById('crew').innerHTML+=`<li>${astronaut.name}</li>`;
+          };
+        });
+      } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+          console.error("ERROR! 404");
+          console.info(JSON.parse(xmlHttp.responseText));
+      }
     };
     xmlHttp.open("GET", url, true);
     xmlHttp.send();
@@ -77,7 +88,6 @@ setInterval(
     hours = addZero(hours);
     mins = addZero(mins);
     secs = addZero(secs);
-
 
     document.getElementById('timeInOrbit').innerText = `
     ${years} years, ${days} days, ${hours} hours, ${mins} min. and ${secs} sec.
