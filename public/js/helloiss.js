@@ -19,6 +19,12 @@
     document.getElementById('positionMap').src = snapshot.val().urlMap;
   });
 
+  // Add ISS country info
+  let countryMap = firebase.database().ref('currentCountry/');
+  countryMap.on('value', function(snapshot) {
+    document.getElementById('countryName').innerText = snapshot.val().name;
+  });
+  
   // Add song info
   let song = firebase.database().ref('song/');
   song.on('value', function(snapshot) {
@@ -26,12 +32,6 @@
     document.getElementById('songArtist').innerText = snapshot.val().artist;
     document.getElementById('songImage').src = snapshot.val().image;
     document.getElementById('songUrl').href = snapshot.val().url;
-  });
-
-  // Add country info
-  let countryName = firebase.database().ref('currentCountry/');
-  countryName.on('value', function(snapshot) {
-    document.getElementById('countryName').innerText = snapshot.val().name;
   });
  
   // Get crew info from NASA
@@ -175,8 +175,11 @@ function sayHello() {
   // TODO create a complete map
   var greetingsTranslations = new Map([
     ['AU','Hi'],
+    ['EN', 'Hello'],
     ['ES','Hola'],
-    ['RU','Priviet']
+    ['RU','Priviet'],
+    ['MV','Alo']
+    
   ]);
 
   // get the country code for current position
@@ -185,10 +188,13 @@ function sayHello() {
     IDcountry = snapshot.val().code;
     Namecountry = snapshot.val().name;
     // map the greeting asociated to the country
-    if (IDcountry) {
-      let greeting = greetingsTranslations.get(IDcountry);
-      document.getElementById('greetingsFromEarth').innerText = `${greeting} from ${Namecountry}, ISS`;
-    } else { IDcountry = 'EN'}
+    greeting = greetingsTranslations.get(IDcountry);
+    if (!greeting) {
+      // country by default EN
+      greeting = greetingsTranslations.get('EN');
+    }
+    document.getElementById('greetingsFromEarth').innerText = `${greeting} from ${Namecountry}, ISS`;
+      
   });
 }
 
