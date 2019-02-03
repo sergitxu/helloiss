@@ -168,10 +168,33 @@ function makeCorsRequest() {
   xhr.send();
 }
 
+function sayHello() {
+
+  // TODO create a complete map
+  var greetingsTranslations = new Map([
+    ['AU','Hi'],
+    ['ES','Hola'],
+    ['RU','Priviet']
+  ]);
+
+  // get the country code for current position
+  let countryCode = firebase.database().ref('currentCountry/');
+  countryCode.on('value', function(snapshot) {
+    IDcountry = snapshot.val().code;
+    Namecountry = snapshot.val().name;
+    // map the greeting asociated to the country
+    if (IDcountry) {
+      let greeting = greetingsTranslations.get(IDcountry);
+      document.getElementById('greetingsFromEarth').innerText = `${greeting} from ${Namecountry}, ISS`;
+    } else { IDcountry = 'EN'}
+  });
+}
+
 function init() {
   
   getCrew("http://api.open-notify.org/astros.json");
-  getISSNews("https://blogs.nasa.gov/spacestation/feed/"); 
+  // getISSNews("https://blogs.nasa.gov/spacestation/feed/");
+  sayHello();
 }
 
 init();
