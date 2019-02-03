@@ -97,7 +97,7 @@ setInterval(
   
 
 //Get ISS news
-
+/*
 let getISSNews = url => {
   var xmlHttp = new XMLHttpRequest();
   
@@ -167,6 +167,8 @@ function makeCorsRequest() {
 
   xhr.send();
 }
+
+*/
 
 function sayHello() {
 
