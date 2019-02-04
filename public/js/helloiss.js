@@ -12,6 +12,7 @@
   ISSCrewImage.on('value', function(snapshot) {
     document.getElementById('crewImg').src = snapshot.val().url;
   });
+  
 
   // Add ISS position info
   let imgMap = firebase.database().ref('currentPosition/');
@@ -35,25 +36,18 @@
   });
  
   // Get crew info from NASA
-  let getCrew = url => {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-        let crew = JSON.parse(xmlHttp.responseText).people;
 
-        crew.forEach(function(astronaut) {
-          if (astronaut.craft === 'ISS') {
-            document.getElementById('crew').innerHTML+=`<li>${astronaut.name}</li>`;
+  function getCrew() {
+      let crew = firebase.database().ref('cosmonaut/crew');
+      crew.on('value', function(snapshot) {
+        let cosmonauts = snapshot.val();
+        cosmonauts.forEach(function(value, index) {
+          if (value.craft === 'ISS') {
+            document.getElementById('crew').innerHTML+=`<li>${value.name}</li>`;
           };
         });
-      } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
-          console.error("ERROR! 404");
-          console.info(JSON.parse(xmlHttp.responseText));
-      }
-    };
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send();
-}
+      });
+  }
 
 function addZero(number){
   if (number < 10) {
@@ -200,7 +194,7 @@ function sayHello() {
 
 function init() {
   
-  getCrew("http://api.open-notify.org/astros.json");
+  getCrew();
   // getISSNews("https://blogs.nasa.gov/spacestation/feed/");
   sayHello();
 }
