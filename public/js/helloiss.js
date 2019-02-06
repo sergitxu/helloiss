@@ -40,7 +40,7 @@
     for (i=0; i < snapshot.val().title.length; i++) {
       document.getElementById('news').innerHTML += `
       <li>
-        <a href="${snapshot.val().urls[i]}">${snapshot.val().title[i]}
+        <a href="${snapshot.val().urls[i]}">${snapshot.val().titles[i]}
         <img src="${snapshot.val().images[i]}"></a>
       </li>
       `;
