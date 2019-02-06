@@ -1,0 +1,26 @@
+body {
+    background-image: url('../img/stars.jpg');
+    margin: 0;
+    color: #FFF;
+}
+
+h1{
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+}
+
+.card {
+    border: 1px solid #333;
+}
+
+title.card__title {
+    display: block;
+}
+
+#map {
+    height: 100%;
+}
+
+#news img {
+    width: 400px;
+}
