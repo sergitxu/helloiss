@@ -9,6 +9,7 @@ gulp.task('sassCompile', async function() {
 });
 
 // add watcher
+// to run watcher, run gulp in the console
 gulp.task('default', function() {
     gulp.watch('sass/*.scss', gulp.series('sassCompile'));
 });
