@@ -13,7 +13,6 @@
     document.getElementById('crewImg').src = snapshot.val().url;
   });
   
-
   // Add ISS position info
   let imgMap = firebase.database().ref('currentPosition/');
   imgMap.on('value', function(snapshot) {
@@ -33,6 +32,19 @@
     document.getElementById('songArtist').innerText = snapshot.val().artist;
     document.getElementById('songImage').src = snapshot.val().image;
     document.getElementById('songUrl').href = snapshot.val().url;
+  });
+
+  // Add ISS news
+  let ISSNews = firebase.database().ref('ISSNews/news/');
+  ISSNews.on('value', function(snapshot) {
+    for (i=0; i < snapshot.val().title.length; i++) {
+      document.getElementById('news').innerHTML += `
+      <li>
+        <a href="${snapshot.val().urls[i]}">${snapshot.val().title[i]}
+        <img src="${snapshot.val().images[i]}"></a>
+      </li>
+      `;
+    };
   });
  
   // Get crew info from NASA
