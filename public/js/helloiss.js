@@ -37,7 +37,7 @@
   // Add ISS news
   let ISSNews = firebase.database().ref('ISSNews/news/');
   ISSNews.on('value', function(snapshot) {
-    for (i=0; i < snapshot.val().title.length; i++) {
+    for (i=0; i < snapshot.val().titles.length; i++) {
       document.getElementById('news').innerHTML += `
       <li>
         <a href="${snapshot.val().urls[i]}">${snapshot.val().titles[i]}
