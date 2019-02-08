@@ -142,6 +142,8 @@ function sayHello() {
   }
 
   // get localization from user and calculate next ISS passes
+  // TODO: FIX in Firebase:
+  // Mixed Content: The page at 'https://hello-iss.firebaseapp.com/' was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 'http://api.open-notify.org/iss-pass.json?lat=40.600747000000005&lon=-3.7071277'. This request has been blocked; the content must be served over HTTPS.
   let getISSPass = url => {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
