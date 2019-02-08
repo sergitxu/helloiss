@@ -130,10 +130,54 @@ function sayHello() {
   });
 }
 
+  function getLocation() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(position => {
+          getISSPass(`http://api.open-notify.org/iss-pass.json?lat=${position.coords.latitude}&lon=${position.coords.longitude}`);
+      });
+      
+    } else {
+        console.warn("Geolocation no soportado :-( ");
+    } 
+  }
+
+  // get localization from user and calculate next ISS passes
+  let getISSPass = url => {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+        let ISSView = JSON.parse(xmlHttp.responseText);
+
+        // Successful response?
+        if (ISSView.message === 'success') {
+          for(i = 0; i < ISSView.request.passes; i++){
+            document.getElementById('ISSPasses').innerHTML += `
+            <li>
+              Duration: ${ISSView.response[i].duration}<br>
+              Risetime: ${ISSView.response[i].risetime}
+            </li>
+          `;
+          };
+        }
+        else {
+          console.log('No connexion');
+        }
+
+      } else if (xmlHttp.readyState === 4 && xmlHttp.status === 404) {
+          console.error("ERROR! 404");
+          console.info(JSON.parse(xmlHttp.responseText));
+      }
+    };
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send();
+  }
+
 function init() {
   
   getCrew();
   sayHello();
+  getLocation()
 }
 
 init();
