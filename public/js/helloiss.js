@@ -151,11 +151,24 @@ function sayHello() {
 
         // Successful response?
         if (ISSView.message === 'success') {
+
+          let duration = '';
+          let risetime = '';
+
           for(i = 0; i < ISSView.request.passes; i++){
+
+            duration = ISSView.response[i].duration;
+            risetime = ISSView.response[i].risetime;
+
+            var risetimeDate = new Date();
+            risetimeDate.setTime(risetime*1000);
+            // risetimeDate = risetimeDate.toUTCString();
+
             document.getElementById('ISSPasses').innerHTML += `
             <li>
-              Duration: ${ISSView.response[i].duration}<br>
-              Risetime: ${ISSView.response[i].risetime}
+              Duration: ${duration} secs
+              <br>
+              Risetime: ${risetimeDate}
             </li>
           `;
           };
@@ -174,7 +187,6 @@ function sayHello() {
   }
 
 function init() {
-  
   getCrew();
   sayHello();
   getLocation()
