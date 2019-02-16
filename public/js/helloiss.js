@@ -119,13 +119,14 @@
     countryCode.on('value', function (snapshot) {
       IDcountry = snapshot.val().code;
       Namecountry = snapshot.val().name;
+      Toponym = snapshot.val().toponym;
       // map the greeting asociated to the country
       greeting = greetingsTranslations.get(IDcountry);
       if (!greeting) {
         // country by default EN
         greeting = greetingsTranslations.get('EN');
       }
-      document.getElementById('greetingsFromEarth').innerText = `${greeting} from ${Namecountry}, ISS`;
+      document.getElementById('greetingsFromEarth').innerText = `${greeting} from ${Toponym} (${Namecountry}), ISS`;
 
     });
   }
