@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Hello ISS</title>
   <meta name="viewport" content="initial-scale=1.0">
@@ -10,91 +11,92 @@
 </head>
 
 <body>
-<h1 id="greetingsFromEarth"></h1>
+  <h1 id="greetingsFromEarth"></h1>
 
-<article class="card">
-  <title class="card__title">ISS Crew</title>
-  <ul id="crew"></ul>
-  <img src="" alt="ISS Crew" id="crewImg">
-</article>
+  <article class="card">
+    <title class="card__title">ISS Crew</title>
+    <ul id="crew"></ul>
+    <img src="" alt="ISS Crew" id="crewImg">
+    <!-- Future expeditions
+  https://www.nasa.gov/mission_pages/station/expeditions/future.html -->
+  </article>
 
-<article class="card">
-  <title class="card__title">ISS current position</title>
-  <img src="" id="positionMap"></div>
-  <span id="countryCode"></span>
-</article>
+  <article class="card">
+    <title class="card__title">ISS current position</title>
+    <img src="" id="positionMap"></div>
+    <span id="countryCode"></span>
+  </article>
 
-<article class="card">
-  <div class="card__title">Popular song in <span id="countryName"></span></div>
-  <a href="" target=_blank" id="songUrl">
-	<p>
-		<span id="songName"></span> (<span id="songArtist"></span>)
-	</p>
-	<img src="" id="songImage"></div>
-  </a>
-</article>
+  <article class="card">
+    <div class="card__title">Popular song in <span id="countryName"></span></div>
+    <a href="" target=_blank" id="songUrl">
+      <p>
+        <span id="songName"></span> (<span id="songArtist"></span>)
+      </p>
+      <img src="" id="songImage"></div>
+    </a>
+  </article>
 
-<article class="card">
-  <title class="card__title">Total time in orbit</title>
-  <span class="counter" id="timeInOrbit"></span></span>
-</article>
+  <article class="card">
+    <title class="card__title">Total time in orbit</title>
+    <span class="counter" id="timeInOrbit"></span></span>
+  </article>
 
-<article class="card">
-  <title class="card__title">Live Earth from space</title>
-  <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
-  width="100%" height="443" type="text/html" 
-  src="https://www.youtube.com/embed/4993sBLAzGA?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
-  </iframe>
-</article>
+  <article class="card">
+    <title class="card__title">Live Earth from space</title>
+    <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="100%" height="443" type="text/html"
+      src="https://www.youtube.com/embed/4993sBLAzGA?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com">
+    </iframe>
+  </article>
 
-<article class="card">
-  <title class="card__title">ISS from ground</title>
-  <!-- 
+  <article class="card">
+    <title class="card__title">ISS from ground</title>
+    <!-- 
     TODO 
     get a source of photos
     create a carousel showing photos from Earth?
     add credits to each photo
   -->
-</article>
+  </article>
 
-<article class="card">
-  <title class="card__title">News from ISS</title>
-  <ul id="news"></ul>  
-</article>
+  <article class="card">
+    <title class="card__title">News from ISS</title>
+    <ul id="news"></ul>
+  </article>
 
 
-<article class="card">
-  <title class="card__title">Instagram from ISS</title>
+  <article class="card">
+    <title class="card__title">Instagram from ISS</title>
 
-</article>
+  </article>
 
-<article class="card">
-  <title class="card__title">Next time ISS will pass close to you</title>
-  <ul id="ISSPasses"></ul>
-</article>
+  <article class="card">
+    <title class="card__title">Next time ISS will pass close to you</title>
+    <ul id="ISSPasses"></ul>
+  </article>
 
-<article class="card">
+  <article class="card">
     <title class="card__title">Notifications possible Earth destructor</title>
     <!-- TODO Get info from NASA api donkiWSA -->
- </article>
+  </article>
 
 
-<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-functions.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAuCyluUBYF9-kXVR8dn1PN92a-xTSY0cI",
-    authDomain: "hello-iss.firebaseapp.com",
-    databaseURL: "https://hello-iss.firebaseio.com",
-    projectId: "hello-iss",
-    storageBucket: "hello-iss.appspot.com",
-    messagingSenderId: "1089443407919"
-  };
-  firebase.initializeApp(config);
-</script>
-<script src="js/helloiss.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-functions.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAuCyluUBYF9-kXVR8dn1PN92a-xTSY0cI",
+      authDomain: "hello-iss.firebaseapp.com",
+      databaseURL: "https://hello-iss.firebaseio.com",
+      projectId: "hello-iss",
+      storageBucket: "hello-iss.appspot.com",
+      messagingSenderId: "1089443407919"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="js/helloiss.js"></script>
 </body>
 
 </html>
