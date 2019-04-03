@@ -35,8 +35,10 @@
     for (i = 0; i < snapshot.val().titles.length; i++) {
       document.getElementById('news').innerHTML += `
       <li>
-        <a href="${snapshot.val().urls[i]}" target="_blank">${snapshot.val().titles[i]}
-        <img src="${snapshot.val().images[i]}"></a>
+        <a href="${snapshot.val().urls[i]}" target="_blank">
+          ${snapshot.val().titles[i]}
+          <div><img src="${snapshot.val().images[i]}"></div>
+        </a>
       </li>
       `;
     };
@@ -120,7 +122,8 @@
   let getLocation = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
-        getISSPass(`http://api.open-notify.org/iss-pass.json?lat=${position.coords.latitude}&lon=${position.coords.longitude}`);
+        // getISSPass(`http://api.open-notify.org/iss-pass.json?lat=${position.coords.latitude}&lon=${position.coords.longitude}`);
+        console.log(`https://www.heavens-above.com/PassSummary.aspx?satid=25544&lat=${position.coords.latitude}&lng=${position.coords.longitude}&alt=${position.coords.altitude}&tz=CET`)
       });
 
     } else {

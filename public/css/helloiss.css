@@ -52,5 +52,8 @@ a {
 
 #news {
   font-size: 20px; }
-  #news img {
-    margin-top: 10px; }
+  #news div {
+    width: 100%;
+    background: #555;
+    text-align: center;
+  }
